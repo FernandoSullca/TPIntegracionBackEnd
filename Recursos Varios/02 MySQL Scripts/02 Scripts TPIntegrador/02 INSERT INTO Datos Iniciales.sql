@@ -1,4 +1,4 @@
-show tables;
+#show tables;
 # drop table lineadeventa;
 # drop table producto;
 # drop table venta;
