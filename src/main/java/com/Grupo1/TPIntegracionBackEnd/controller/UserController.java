@@ -1,4 +1,4 @@
-package com.Grupo1.controller;
+package com.Grupo1.TPIntegracionBackEnd.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Grupo1.model.UserCredentials;
+import com.Grupo1.TPIntegracionBackEnd.model.*;
 
 @RestController
 public class UserController {

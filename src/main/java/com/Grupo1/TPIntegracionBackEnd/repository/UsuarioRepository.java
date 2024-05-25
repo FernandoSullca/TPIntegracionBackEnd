@@ -1,9 +1,9 @@
-package com.Grupo1.repository;
+package com.Grupo1.TPIntegracionBackEnd.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.Grupo1.model.Usuario;
+import com.Grupo1.TPIntegracionBackEnd.model.*;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {

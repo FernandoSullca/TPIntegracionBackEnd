@@ -1,15 +1,16 @@
 package com.Grupo1.TPIntegracionBackEnd;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@ComponentScan("com.Grupo1.controller")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.Grupo1.TPIntegracionBackEnd")
+@EnableJpaRepositories(basePackages = "com.Grupo1.TPIntegracionBackEnd.repository")
+@ComponentScan(basePackages = "com.Grupo1.TPIntegracionBackEnd")
 public class TpIntegracionBackEndApplication {
 
 	public static void main(String[] args) {

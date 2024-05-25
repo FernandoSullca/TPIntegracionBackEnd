@@ -1,10 +1,10 @@
-package com.Grupo1.service;
+package com.Grupo1.TPIntegracionBackEnd.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Grupo1.model.Usuario;
-import com.Grupo1.repository.UsuarioRepository;
+import com.Grupo1.TPIntegracionBackEnd.model.*;
+import com.Grupo1.TPIntegracionBackEnd.repository.*;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
