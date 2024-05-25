@@ -1,4 +1,4 @@
-package com.Grupo1.model;
+package com.Grupo1.TPIntegracionBackEnd.model;
 
 public class UserCredentials {
 

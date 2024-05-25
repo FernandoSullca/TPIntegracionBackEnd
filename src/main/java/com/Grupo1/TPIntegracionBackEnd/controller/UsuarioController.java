@@ -1,4 +1,4 @@
-package com.Grupo1.controller;
+package com.Grupo1.TPIntegracionBackEnd.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,15 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Grupo1.model.Usuario;
-import com.Grupo1.service.UsuarioService;
+import com.Grupo1.TPIntegracionBackEnd.model.*;
+import com.Grupo1.TPIntegracionBackEnd.service.*;
 
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
+    private final UsuarioService service;
+    
     @Autowired
-    private UsuarioService service;
+    public UsuarioController(UsuarioService usuarioService) {
+        this.service = usuarioService;
+    }
 
     // Endpoint usando Criteria API
     @PostMapping("/login/criteria")

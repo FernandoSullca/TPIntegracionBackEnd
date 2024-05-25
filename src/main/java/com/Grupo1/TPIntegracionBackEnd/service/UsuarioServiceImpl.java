@@ -1,11 +1,12 @@
-package com.Grupo1.service;
+package com.Grupo1.TPIntegracionBackEnd.service;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Grupo1.model.Usuario;
-import com.Grupo1.repository.UsuarioRepository;
-
+import com.Grupo1.TPIntegracionBackEnd.model.*;
+import com.Grupo1.TPIntegracionBackEnd.repository.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
@@ -14,12 +15,16 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
+
 @Service
-public class UsuarioService {
+public class UsuarioServiceImpl  implements UsuarioService{
 
+
+    private UsuarioRepository  repository;
     @Autowired
-    private UsuarioRepository repository;
-
+    public UsuarioServiceImpl(UsuarioRepository repository) {
+        this.repository = repository;
+    }
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -66,4 +71,15 @@ public class UsuarioService {
             return null;
         }
     }
+
+    @Override
+    public List<Usuario> getAllUsuarios() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Usuario getUsuarioById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 }
+
