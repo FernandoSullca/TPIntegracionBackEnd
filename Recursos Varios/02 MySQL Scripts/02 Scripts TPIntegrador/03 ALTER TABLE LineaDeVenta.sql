@@ -1,1 +1,0 @@
-alter table lineadeventa add precioUnitario decimal(15,2);
