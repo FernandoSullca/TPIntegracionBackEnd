@@ -13,6 +13,7 @@ ALTER TABLE lineadeventa DROP COLUMN codigo_producto;
 #Camino 2: Las columnas nuevas tienen referencias 
 #Asumo que las columnas nuevas estan referenciadas, por lo que esto es más para limpiar y reconstruir la tabla original
 ALTER TABLE lineadeventa DROP FOREIGN KEY FK_LDV_Venta; #Esto es para liberar a la tabla de la referencia Venta <-> Linea de Venta
+ALTER TABLE lineadeventa DROP FOREIGN KEY FK_LDV_Producto; #Esto es para liberar a la tabla de la referencia Linea de venta <-> Producto
 ALTER TABLE lineadeventa DROP PRIMARY KEY; #Esto es para liberar a la tabla de las PKs
 /*WARNING ZONE: DROPS*/
 ALTER TABLE lineadeventa DROP COLUMN nro_linea; 
@@ -21,3 +22,4 @@ ALTER TABLE lineadeventa DROP COLUMN codigo_producto;
 /*Rconstruyo las referencias originales*/
 ALTER TABLE lineadeventa ADD CONSTRAINT PK_LineaDeVenta PRIMARY KEY (ventaID,nroLinea);
 ALTER TABLE lineadeventa ADD CONSTRAINT FK_LDV_Venta FOREIGN KEY (ventaID) REFERENCES Venta(id);
+ALTER TABLE lineadeventa ADD CONSTRAINT FK_LDV_Producto FOREIGN KEY (codigoProducto) REFERENCES Producto(codigo);
