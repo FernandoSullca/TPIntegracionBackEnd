@@ -1,6 +1,7 @@
 package com.Grupo1.TPIntegracionBackEnd.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +26,15 @@ public class LineaDeVentaService {
 	    
 	    public void deleteLineaDeVenta(LineaDeVentaId id) {
 	    	lineaDeVentaRepository.deleteById(id);	    }
+
+	    public LineaDeVenta saveLineaDeVenta(LineaDeVenta lineaDeVenta) {
+	    	 if (lineaDeVenta.getVentaID() == null || lineaDeVenta.getNroLinea()==null) {
+	    		 lineaDeVenta.setNroLinea(10);
+	    		 lineaDeVenta.setVentaID(10);
+	         }
+	        return lineaDeVentaRepository.save(lineaDeVenta);
+	    }
+	    private UUID generateUniqueCode() {
+	        return UUID.randomUUID();
+	    }
 }

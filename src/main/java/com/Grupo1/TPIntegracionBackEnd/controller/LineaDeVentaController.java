@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +44,15 @@ public class LineaDeVentaController {
         LineaDeVentaId id = new LineaDeVentaId(ventaID, nroLinea);
         lineaDeVentaService.deleteLineaDeVenta(id);
         return ResponseEntity.noContent().build();
+    }
+
+    
+    @PostMapping
+    public LineaDeVenta createLineaDeVenta(@RequestBody LineaDeVenta lineaDeVenta) {
+    	 if (lineaDeVenta.getVentaID() == null || lineaDeVenta.getNroLinea()==null) {
+             throw new IllegalArgumentException("El campo 'Venta Id' y 'NumeroLinea' no puede estar vacío.");
+         }
+        return lineaDeVentaService.saveLineaDeVenta(lineaDeVenta);
     }
 
 }

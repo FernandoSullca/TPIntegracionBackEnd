@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "venta")
 public class Venta {
@@ -38,8 +40,9 @@ public class Venta {
     @Column(name = "rechazada")
     private Boolean rechazada;
 
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<LineaDeVenta> lineasDeVenta;
+//    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonManagedReference
+//    private List<LineaDeVenta> lineasDeVenta;
 
     // Getters and Setters
     public Integer getId() {
@@ -82,12 +85,12 @@ public class Venta {
         this.rechazada = rechazada;
     }
 
-    public List<LineaDeVenta> getLineasDeVenta() {
-        return lineasDeVenta;
-    }
-
-    public void setLineasDeVenta(List<LineaDeVenta> lineasDeVenta) {
-        this.lineasDeVenta = lineasDeVenta;
-    }
+//    public List<LineaDeVenta> getLineasDeVenta() {
+//        return lineasDeVenta;
+//    }
+//
+//    public void setLineasDeVenta(List<LineaDeVenta> lineasDeVenta) {
+//        this.lineasDeVenta = lineasDeVenta;
+//    }
 }
 

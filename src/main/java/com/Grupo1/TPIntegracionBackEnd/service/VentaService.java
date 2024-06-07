@@ -17,4 +17,9 @@ public class VentaService {
     public List<Venta> getAllVentas() {
         return ventaRepository.findAll();
     }
+
+	public Venta saveVenta(Venta venta) {
+		// TODO Auto-generated method stub
+	    return ventaRepository.save(venta);
+	}
 }

@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "lineadeventa")
 @IdClass(LineaDeVentaId.class)//Para solucionar la serializacion de la clave compuesta...
@@ -44,6 +46,7 @@ public class LineaDeVenta implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "ventaID", insertable = false, updatable = false)
+//    @JsonBackReference
     private Venta venta;
 
     // Getters and Setters
