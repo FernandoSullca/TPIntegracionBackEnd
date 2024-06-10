@@ -40,4 +40,9 @@ public class ProductoService {
     private String generateUniqueCode() {
         return UUID.randomUUID().toString();
     }
+
+	public boolean existe(String codigo) {
+		// TODO Auto-generated method stub
+		 return productoRepository.existsById(codigo);
+	}
 }
