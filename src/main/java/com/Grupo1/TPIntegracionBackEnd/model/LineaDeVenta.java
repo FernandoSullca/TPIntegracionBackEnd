@@ -2,6 +2,8 @@ package com.Grupo1.TPIntegracionBackEnd.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
@@ -15,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "lineadeventa")
-@IdClass(LineaDeVentaId.class)//Para solucionar la serializacion de la clave compuesta...
+//@IdClass(LineaDeVentaId.class)//Para solucionar la serializacion de la clave compuesta...
 public class LineaDeVenta implements Serializable{
 
     /**
@@ -23,19 +25,26 @@ public class LineaDeVenta implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-    @Column(name = "ventaID", nullable = false)
-    private Integer ventaID;
-
-    @Id
-    @Column(name = "nroLinea", nullable = false)
-    private Integer nroLinea;
+	
+	  @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "id", nullable = false)
+	    private Integer id;
+	  
+//	@Id
+//    @Column(name = "ventaID", nullable = false)
+//    private Integer ventaID;
+//
+//    @Id
+//    @Column(name = "nroLinea", nullable = false)
+//    private Integer nroLinea;
 
     @ManyToOne 
     @JoinColumn(name = "codigoProducto", referencedColumnName = "codigo")
     private Producto producto;
 
-    @Column(name = "cantidad")
+
+	@Column(name = "cantidad")
     private Integer cantidad;
 
     @Column(name = "subtotal", precision = 15, scale = 2)
@@ -50,22 +59,15 @@ public class LineaDeVenta implements Serializable{
     private Venta venta;
 
     // Getters and Setters
-    public Integer getVentaID() {
-        return ventaID;
-    }
 
-    public void setVentaID(Integer ventaID) {
-        this.ventaID = ventaID;
-    }
+    public Integer getId() {
+  		return id;
+  	}
 
-    public Integer getNroLinea() {
-        return nroLinea;
-    }
-
-    public void setNroLinea(Integer nroLinea) {
-        this.nroLinea = nroLinea;
-    }
-
+  	public void setId(Integer id) {
+  		this.id = id;
+  	}
+    
     public Producto getProducto() {
         return producto;
     }

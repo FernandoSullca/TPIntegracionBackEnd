@@ -28,10 +28,10 @@ public class LineaDeVentaService {
 	    	lineaDeVentaRepository.deleteById(id);	    }
 
 	    public LineaDeVenta saveLineaDeVenta(LineaDeVenta lineaDeVenta) {
-	    	 if (lineaDeVenta.getVentaID() == null || lineaDeVenta.getNroLinea()==null) {
-	    		 lineaDeVenta.setNroLinea(10);
-	    		 lineaDeVenta.setVentaID(10);
-	         }
+//	    	 if (lineaDeVenta.getVentaID() == null || lineaDeVenta.getNroLinea()==null) {
+//	    		 lineaDeVenta.setNroLinea(10);
+//	    		 lineaDeVenta.setVentaID(10);
+//	         }
 	        return lineaDeVentaRepository.save(lineaDeVenta);
 	    }
 	    private UUID generateUniqueCode() {

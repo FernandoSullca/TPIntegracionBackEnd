@@ -40,10 +40,9 @@ public class Venta {
     @Column(name = "rechazada")
     private Boolean rechazada;
 
-//    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonManagedReference
-//    private List<LineaDeVenta> lineasDeVenta;
-
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LineaDeVenta> lineasDeVenta;
+    
     // Getters and Setters
     public Integer getId() {
         return id;

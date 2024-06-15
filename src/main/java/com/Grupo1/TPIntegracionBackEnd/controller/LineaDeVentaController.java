@@ -49,9 +49,9 @@ public class LineaDeVentaController {
     
     @PostMapping
     public LineaDeVenta createLineaDeVenta(@RequestBody LineaDeVenta lineaDeVenta) {
-    	 if (lineaDeVenta.getVentaID() == null || lineaDeVenta.getNroLinea()==null) {
-             throw new IllegalArgumentException("El campo 'Venta Id' y 'NumeroLinea' no puede estar vacío.");
-         }
+//    	 if (lineaDeVenta.getVentaID() == null || lineaDeVenta.getNroLinea()==null) {
+//             throw new IllegalArgumentException("El campo 'Venta Id' y 'NumeroLinea' no puede estar vacío.");
+//         }
         return lineaDeVentaService.saveLineaDeVenta(lineaDeVenta);
     }
 
