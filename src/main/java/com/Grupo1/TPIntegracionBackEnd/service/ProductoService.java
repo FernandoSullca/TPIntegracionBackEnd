@@ -45,4 +45,14 @@ public class ProductoService {
 		// TODO Auto-generated method stub
 		 return productoRepository.existsById(codigo);
 	}
+	public Producto updateStock(Producto productoUpdate) throws Exception {
+		 Optional<Producto> productoExistente =null;
+		productoExistente = productoRepository.findById(productoUpdate.getCodigo());
+	        if (productoExistente != null ||productoExistente.isPresent()) {
+	            productoExistente.get().setStock(productoUpdate.getStock());
+	            return productoRepository.save(productoExistente.get());
+	        } else {
+	            throw new Exception("Producto no encontrado");
+	        }
+	}
 }

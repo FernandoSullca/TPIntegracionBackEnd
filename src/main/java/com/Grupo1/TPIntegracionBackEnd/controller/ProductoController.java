@@ -64,4 +64,10 @@ public class ProductoController {
 	        productoService.deleteProducto(codigo);
 	        return ResponseEntity.noContent().build();
 	    }
+	    
+	    @PostMapping("/actualizarStock") 
+	    public ResponseEntity<?> updateStockProducto(@RequestBody Producto producto) throws Exception {
+	    	 Producto actualizado = productoService.updateStock(producto);
+	         return ResponseEntity.ok(actualizado);
+	  }
 }

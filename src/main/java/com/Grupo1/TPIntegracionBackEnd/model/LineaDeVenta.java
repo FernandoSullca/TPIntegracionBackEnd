@@ -14,11 +14,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "lineadeventa")
 //@IdClass(LineaDeVentaId.class)//Para solucionar la serializacion de la clave compuesta...
-public class LineaDeVenta implements Serializable{
+public class LineaDeVenta {
 
     /**
 	 * 
@@ -54,8 +55,9 @@ public class LineaDeVenta implements Serializable{
     private BigDecimal precioUnitario;
 
     @ManyToOne
-    @JoinColumn(name = "ventaID", insertable = false, updatable = false)
+    @JoinColumn(name = "ventaID")
 //    @JsonBackReference
+    @JsonIgnore
     private Venta venta;
 
     // Getters and Setters

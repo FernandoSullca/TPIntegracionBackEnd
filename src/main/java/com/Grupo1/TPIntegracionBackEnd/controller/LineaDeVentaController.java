@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Grupo1.TPIntegracionBackEnd.model.LineaDeVenta;
 import com.Grupo1.TPIntegracionBackEnd.model.LineaDeVentaId;
+import com.Grupo1.TPIntegracionBackEnd.model.Venta;
 import com.Grupo1.TPIntegracionBackEnd.service.LineaDeVentaService;
+import com.Grupo1.TPIntegracionBackEnd.service.VentaService;
 
 @RestController
 @RequestMapping("/api/lineasdeventa")
@@ -23,6 +25,9 @@ public class LineaDeVentaController {
     @Autowired
     private LineaDeVentaService lineaDeVentaService;
 
+    @Autowired
+    private VentaService ventaService;
+    
     @GetMapping
     public List<LineaDeVenta> getAllLineasDeVenta() {
         return lineaDeVentaService.getAllLineasDeVenta();
@@ -46,13 +51,18 @@ public class LineaDeVentaController {
         return ResponseEntity.noContent().build();
     }
 
-    
-    @PostMapping
-    public LineaDeVenta createLineaDeVenta(@RequestBody LineaDeVenta lineaDeVenta) {
-//    	 if (lineaDeVenta.getVentaID() == null || lineaDeVenta.getNroLinea()==null) {
-//             throw new IllegalArgumentException("El campo 'Venta Id' y 'NumeroLinea' no puede estar vacío.");
-//         }
-        return lineaDeVentaService.saveLineaDeVenta(lineaDeVenta);
+    @PostMapping("/{ventaId}")
+    public ResponseEntity<LineaDeVenta> createLineaDeVenta(@PathVariable Integer ventaId, @RequestBody LineaDeVenta lineaDeVenta) {
+    	// Validar si la venta existe
+        Venta ventaOptional = ventaService.getVenta(ventaId);
+        if (ventaOptional==null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    	
+    	Venta venta = new Venta();
+         venta.setId(ventaId);
+         lineaDeVenta.setVenta(venta);
+         LineaDeVenta savedLineaDeVenta = lineaDeVentaService.saveLineaDeVenta(lineaDeVenta);
+         return ResponseEntity.ok(savedLineaDeVenta);
     }
-
 }
