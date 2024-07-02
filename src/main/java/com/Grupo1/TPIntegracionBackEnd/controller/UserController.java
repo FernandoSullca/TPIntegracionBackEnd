@@ -32,6 +32,6 @@ public class UserController {
 		
 	      
 	        
-        return "User details";
+        return "Operador";
     }
 }
