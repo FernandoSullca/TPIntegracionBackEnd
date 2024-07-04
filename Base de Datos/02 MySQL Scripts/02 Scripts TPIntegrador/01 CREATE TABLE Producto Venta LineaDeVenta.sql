@@ -28,3 +28,8 @@ create table Producto(
 		CONSTRAINT FK_LDV_Producto FOREIGN KEY (codigoProducto) REFERENCES Producto(codigo),
         CONSTRAINT FK_LDV_Venta FOREIGN KEY (ventaID) REFERENCES Venta(id)
     );
+	
+	
+	alter table lineadeventa add precioUnitario decimal(15,2);
+	ALTER TABLE `tpintegracion`.`venta` 
+CHANGE COLUMN `id` `id` INT NOT NULL AUTO_INCREMENT ;
