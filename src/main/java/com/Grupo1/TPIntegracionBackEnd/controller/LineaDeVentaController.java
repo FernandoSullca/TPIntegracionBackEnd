@@ -65,4 +65,15 @@ public class LineaDeVentaController {
          LineaDeVenta savedLineaDeVenta = lineaDeVentaService.saveLineaDeVenta(lineaDeVenta);
          return ResponseEntity.ok(savedLineaDeVenta);
     }
+    
+    @GetMapping("/{ventaId}")
+    public ResponseEntity<List<LineaDeVenta> > createLineaDeVenta(@PathVariable Integer ventaId) {
+           List<LineaDeVenta> lineaDeVenta = lineaDeVentaService.getLineaDeVentaByVentaId(ventaId);
+           if (lineaDeVenta != null) {
+               return ResponseEntity.ok(lineaDeVenta);
+           } else {
+               return ResponseEntity.notFound().build();
+           }
+    }
+    
 }
