@@ -70,4 +70,5 @@ public class ProductoController {
 	    	 Producto actualizado = productoService.updateStock(producto);
 	         return ResponseEntity.ok(actualizado);
 	  }
+	    
 }
