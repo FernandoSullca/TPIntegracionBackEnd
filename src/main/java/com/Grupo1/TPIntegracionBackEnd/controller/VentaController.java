@@ -8,12 +8,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Grupo1.TPIntegracionBackEnd.model.Producto;
 import com.Grupo1.TPIntegracionBackEnd.model.Venta;
 import com.Grupo1.TPIntegracionBackEnd.service.VentaService;
 
@@ -27,6 +29,13 @@ public class VentaController {
     @GetMapping
     public List<Venta> getAllVentas() {
         return ventaService.getAllVentas();
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Venta>  getVenta(@PathVariable Integer id) {
+           return ventaService.getVentaById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
     
     @PostMapping

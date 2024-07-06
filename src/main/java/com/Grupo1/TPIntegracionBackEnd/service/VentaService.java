@@ -3,6 +3,7 @@ package com.Grupo1.TPIntegracionBackEnd.service;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,5 +34,10 @@ public class VentaService {
 	public List<Venta> getEntreFechas(LocalDateTime atStartOfDay, LocalDateTime atStartOfDay2) {
 		// TODO Auto-generated method stub
 		 return ventaRepository.findByFechaBetween(atStartOfDay, atStartOfDay2);
+	}
+
+	public Optional<Venta> getVentaById(Integer codigo) {
+		// TODO Auto-generated method stub
+		return ventaRepository.findById(codigo);
 	}
 }
