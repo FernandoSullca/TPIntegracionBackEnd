@@ -8,12 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Grupo1.TPIntegracionBackEnd.model.Producto;
+import com.Grupo1.TPIntegracionBackEnd.model.Usuario;
 import com.Grupo1.TPIntegracionBackEnd.repository.ProductoRepository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
 
 @Service
 public class ProductoService {
 
-
+	@PersistenceContext
+    private EntityManager entityManager;
     @Autowired
     private ProductoRepository productoRepository;
 
@@ -33,8 +39,16 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    public void deleteProducto(String codigo) {
-        productoRepository.deleteById(codigo);
+    public Producto deleteProducto(String codigo) {
+    	String sql = "update producto set activo = 0 where codigo = :codigo";
+        try {
+            return (Producto) entityManager.createNativeQuery(sql, Producto.class)
+                                .setParameter("codigo", codigo)
+                                .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    	//productoRepository.deleteById(codigo);
     }
     
     private String generateUniqueCode() {
@@ -44,6 +58,7 @@ public class ProductoService {
 	public boolean existe(String codigo) {
 		// TODO Auto-generated method stub
 		 return productoRepository.existsById(codigo);
+		
 	}
 	public Producto updateStock(Producto productoUpdate) throws Exception {
 		 Optional<Producto> productoExistente =null;
