@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.Grupo1.TPIntegracionBackEnd.model.Producto;
@@ -14,6 +15,7 @@ import com.Grupo1.TPIntegracionBackEnd.repository.ProductoRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 
 @Service
 public class ProductoService {
@@ -39,15 +41,17 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    public Producto deleteProducto(String codigo) {
-    	String sql = "update producto set activo = 0 where codigo = :codigo";
-        try {
-            return (Producto) entityManager.createNativeQuery(sql, Producto.class)
-                                .setParameter("codigo", codigo)
-                                .getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+    public Producto deleteProducto(String codigo) throws Exception {
+    	
+    	    Optional<Producto> productoExistente =null;
+    		productoExistente = productoRepository.findById(codigo);
+    	        if (productoExistente != null ||productoExistente.isPresent()) {
+    	        	boolean estado=productoExistente.get().getActivo();
+    	            productoExistente.get().setActivo(!estado);
+    	            return productoRepository.save(productoExistente.get());
+    	        } else {
+    	            throw new Exception("Producto no encontrado");
+    	        }   
     	//productoRepository.deleteById(codigo);
     }
     
@@ -69,5 +73,18 @@ public class ProductoService {
 	        } else {
 	            throw new Exception("Producto no encontrado");
 	        }
+	}
+
+	public Producto updateProducto(Producto productoUpdate) throws Exception {
+		 Optional<Producto> productoExistente =null;
+			productoExistente = productoRepository.findById(productoUpdate.getCodigo());
+		        if (productoExistente != null ||productoExistente.isPresent()) {
+		            productoExistente.get().setStock(productoUpdate.getStock());
+		            productoExistente.get().setDescripcion(productoUpdate.getDescripcion());
+		            productoExistente.get().setPrecio(productoUpdate.getPrecio());
+		            return productoRepository.save(productoExistente.get());
+		        } else {
+		            throw new Exception("Producto no encontrado");
+		        }
 	}
 }

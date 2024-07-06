@@ -60,14 +60,25 @@ public class ProductoController {
 	    
 
 	    @DeleteMapping("/{codigo}")
-	    public ResponseEntity<Void> deleteProducto(@PathVariable String codigo) {
-	        productoService.deleteProducto(codigo);
-	        return ResponseEntity.noContent().build();
+	    public Producto deleteProducto(@PathVariable String codigo) {
+	        try {
+				return  productoService.deleteProducto(codigo);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+	        		
 	    }
 	    
 	    @PostMapping("/actualizarStock") 
 	    public ResponseEntity<?> updateStockProducto(@RequestBody Producto producto) throws Exception {
 	    	 Producto actualizado = productoService.updateStock(producto);
+	         return ResponseEntity.ok(actualizado);
+	  }
+	    @PostMapping("/actualizarProducto") 
+	    public ResponseEntity<?> updateProducto(@RequestBody Producto producto) throws Exception {
+	    	 Producto actualizado = productoService.updateProducto(producto);
 	         return ResponseEntity.ok(actualizado);
 	  }
 	    
